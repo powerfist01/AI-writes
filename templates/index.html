@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Story AI </title>
+    <link rel='stylesheet' href='{{ url_for("static", filename="css/bootstrap.min.css") }}'>
+    <link rel='stylesheet' href='{{ url_for("static", filename="css/base.css") }}'>
+    <link rel="shortcut icon" href="{{ url_for("static", filename="img/favicon.ico") }}" type="image/x-icon">
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <img src="/static/img/reading-book.png" alt="" width="50px" height="50px">
+                <a class="navbar-brand" href="/">
+                    &lt Story AI &gt
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="add-margin-top"></div>
+    {% block content %}
+
+    {% endblock %}
+    <div class="add-margin-bottom"></div>
+    <div class="container inline-p text-center">
+        <legend></legend>
+        <h4>
+            <p>Made with 💚 by <a href="http://singhsujeet0.web.app" style="text-decoration: none;">Sujeet Singh</a>
+            <p>
+        </h4>
+    </div>
+</body>
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/base.js') }}"></script>
+<script src="{{ url_for('static', filename='js/typed.min.js') }}"></script>
+{{ pagedown.include_pagedown() }}
+<script type="text/javascript">
+    var typed3 = new Typed('.element', {
+        strings: ['A Simple AI Story Teller', 'A Simple AI Story Generator', 'A Simple AI Story Engine'],
+        typeSpeed: 100,
+        backSpeed: 100,
+        smartBackspace: true,
+        loop: true,
+    });
+</script>
+
+</html>

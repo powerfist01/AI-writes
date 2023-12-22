@@ -1,0 +1,16 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+venv/
+.env/
+pip-*.log
+*.sublime-project
+*.sublime-workspace
+.vscode/
+.git/
+.gitignore
+.gitattributes
+.hg/
+.hgignore
+.svn/

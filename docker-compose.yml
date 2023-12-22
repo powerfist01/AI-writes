@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  backend:
+    build: .
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/app
+
+  celery_service:
+    image: celery:4
+    volumes:
+      - .:/app
+    command: celery -A app.celery worker --loglevel=info
+  
+  flower:
+    image: mher/flower:2.0
+    ports:
+      - 5555:5555
+    command: flower -A app.celery --port=5555
