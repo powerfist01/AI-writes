@@ -11,15 +11,16 @@
             <div class="row" style="display: flex; justify-content: center;">
                 <form class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center slideanim" method="POST" action="/">
                     <div>
-                        <br>
-                        {{ form.csrf_token }}
-                        
+
                         {% for message in form.email.errors %}
                             <div class="alert alert-danger">{{ message }}</div>
                         {% endfor %}
                         
                         {% for message in form.email.success %}
-                            <div class="alert alert-success">{{ message }}</div>
+                            <div class="alert alert-success">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                {{ message }}
+                            </div>
                         {% endfor %}
 
                         {% for message in get_flashed_messages() %}
@@ -28,8 +29,9 @@
                             {{ message }}
                         </div>
                         {% endfor %}
-    
-                        {{ form.email(class="form-control no_borders", placeholder="Your email here") }}
+                        
+                        {{ form.hidden_tag() }}
+                        {{ form.email(class="form-control no_borders", placeholder="Your email here to receive an enchanting story") }}
                         <br>
                         {{ form.submit(class='btn btn-primary form-control no_borders') }}
                     </div>
@@ -68,4 +70,8 @@
         </div>
     </div> <!-- ./row -->
 </div> <!-- ./cotainer -->
+
+<script>
+
+</script>
 {% endblock %}

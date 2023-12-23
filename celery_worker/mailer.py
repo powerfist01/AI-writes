@@ -9,16 +9,22 @@ import config.settings as settings
 class Mailer:
 
     def send_client_email(self, subject, content, client_email):
-
+        '''
+            Send email to client
+        '''
         email_parameters = {
             'subject': subject,
             'content': content,
             'to': [client_email],
-            'bcc': [settings.BCC_MAIL],
+            'bcc': [settings.MAIL_BCC],
         }
+
         self.__send_email(email_parameters)
 
     def __send_email(self, email_parameters):
+        '''
+            Send email
+        '''
 
         server = smtplib.SMTP_SSL(settings.MAIL_HOST, 465)
         server.login(settings.MAIL_FROM_ADDRESS, settings.MAIL_PASSWORD)

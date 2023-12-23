@@ -1,22 +1,14 @@
-import random
-
-from flask import (
-    Flask, render_template
-)
-
-from flask_wtf import FlaskForm
 from flask_pagedown import PageDown
-from wtforms import StringField, SubmitField, validators
-from app.gemini_pro import GeminiPro
+from flask import Flask, render_template, request
+
+import services.settings as settings
+from services.worker import celery
+from services.forms import EnterEmailForm
 
 app = Flask(__name__)
 pagedown = PageDown(app)
 
-app.secret_key = str(random.randint(1, 20))
-
-class EnterEmailForm(FlaskForm):
-    email = StringField('Email*', validators=[validators.InputRequired("Please enter your email"), validators.Email('Email format incorrect')])
-    submit = SubmitField('Send me an AI-Generated story!')
+app.secret_key = settings.APP_SECRET
 
 @app.route('/', methods=['GET', 'POST'])
 def home_page():
@@ -25,15 +17,14 @@ def home_page():
     '''
     
     form = EnterEmailForm()
-    if form.validate_on_submit():
-
-        # gemini = GeminiPro()
-        # story = gemini.generate_story_using_prompt()
+    if request.method == 'POST' and form.validate():
+    
+        client_email = request.form['email']
+    
+        task = celery.send_task('tasks.send_enchanting_story_to_user', args=[client_email], kwargs={})
+        form.email.task_id = task.id
 
         form.email.success = ['Your story is brewing! We will send you an email once the AI-generated story is cooked.']
         return render_template('homepage.html', form=form)
     
     return render_template('homepage.html', form=form)
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)

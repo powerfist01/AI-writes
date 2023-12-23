@@ -11,4 +11,4 @@ COPY requirements.txt $APP_HOME
 RUN pip install --upgrade pip
 RUN pip3 install --root-user-action=ignore -r requirements.txt
 
-CMD ["python3", "manage.py", "--reload"]
+CMD ["gunicorn", "--reload", "-w", "4", "-b", "0.0.0.0:5000", "manage:app"]

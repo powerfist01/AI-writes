@@ -14,3 +14,4 @@ pip-*.log
 .hg/
 .hgignore
 .svn/
+celery_worker/

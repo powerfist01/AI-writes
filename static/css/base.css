@@ -52,13 +52,13 @@ nav .navbar-brand {
 .jumbotron {
     margin-bottom: 0px;
     height: 180px;
-    color: white;
-    background-color: #2E3134;
+    color: black;
+    background-color: rgb(242, 243, 244);
     border-radius: 0px !important;
 }
 
 .jumbotron .element {
-    color: white;
+    color: black;
 }
 
 .section-heading {
